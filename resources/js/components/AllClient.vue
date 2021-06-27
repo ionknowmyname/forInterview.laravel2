@@ -65,16 +65,9 @@ export default {
     created() {
         let uri = "http://localhost:8000/api/clients";
         this.axios.get(uri).then(response => {
-            this.clients = response.data.data;
+            this.clients = response.data;
         });
     },
-    methods: {
-        deletePost(id) {
-            let uri = `http://vuelaravelcrud.test/api/post/delete/${id}`;
-            this.axios.delete(uri).then(response => {
-                this.posts.splice(this.posts.indexOf(id), 1);
-            });
-        }
-    }
+    methods: {}
 };
 </script>

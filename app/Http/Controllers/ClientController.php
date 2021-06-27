@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Client;
 use DB;
-//use App\Mail\WelcomeMail;
+use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Mail;
 
 class ClientController extends Controller
@@ -28,12 +28,13 @@ class ClientController extends Controller
         // $client->filename = request()->file('filename')->store('public/images');  
         
         $client->save();
-
+        Mail::to($client->email)->send(new WelcomeMail());  // $client->firstname
+        
         return response()->json([
             'message'=>'Client Created Successfully!!',
             'client'=>$client
         ]);
-       // Mail::to($client->email)->send(new WelcomeMail());  // $client->firstname
+        
 
         ////////////////////////////////////////////
 
@@ -69,11 +70,11 @@ class ClientController extends Controller
 
 
     function getclientlist(){
-        $clients = Client::all()->toArray();
-        return array_reverse($clients);
+        /* $clients = Client::all()->toArray();
+        return array_reverse($clients); */
 
-        /* $clients = Client::all();
-        return $clients; */
+        $clients = Client::all();
+        return $clients;
     }
 
     function getsingleclient($id) // Client  Request $req, $id

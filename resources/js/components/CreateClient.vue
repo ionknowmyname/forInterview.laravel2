@@ -83,7 +83,7 @@ export default {
             axios
                 .post("http://localhost:8000/api/create", this.client)
                 .then(response => {
-                    console.log("res from api:", res.data);
+                    console.log("res from api:", response.data);
                     this.$router.push({ name: "allclient" });
                 })
                 .catch(err => console.log(err));
